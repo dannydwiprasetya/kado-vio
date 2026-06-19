@@ -181,6 +181,50 @@
         .text-2 { top: 15%; right: 5%; transform: translateY(20px); animation-delay: 1.2s; }
         .text-3 { bottom: 15%; left: 0%; transform: translateY(20px); animation-delay: 1.9s; }
         .text-4 { bottom: 5%; right: 0%; transform: translateY(20px); animation-delay: 2.6s; }
+
+        /* --- Desain Surat / Pesan --- */
+        .letter-container {
+            background-color: #f5f0e6; /* Warna kertas beige premium */
+            color: #333;
+            max-width: 550px;
+            margin: 60px auto 20px;
+            padding: 50px 40px;
+            border-radius: 4px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            text-align: left;
+            position: relative;
+            border: 1px solid #d4af37; /* Tepi warna gold */
+            animation: slideUp 0.8s ease-out;
+        }
+
+        /* Garis tipis di bagian dalam surat */
+        .letter-container::before {
+            content: '';
+            position: absolute;
+            top: 12px; left: 12px; right: 12px; bottom: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.4); 
+            pointer-events: none;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .letter-text p {
+            font-size: 1.1em;
+            line-height: 1.9;
+            color: #444; /* Teks abu-abu gelap agar nyaman dibaca */
+            margin-bottom: 20px;
+        }
+
+        .letter-signature {
+            font-style: italic;
+            text-align: right;
+            margin-top: 40px;
+            font-size: 1.1em;
+            color: #8c7326;
+        }
     </style>
 </head>
 <body>
@@ -214,9 +258,23 @@
     <!-- LAYAR 3A: Surat / Pesan -->
     <div id="message-screen" class="content-screen hidden">
         <button class="back-btn" onclick="backToMenu()">⟵ Back</button>
-        <h2 style="color: #e3c28c; margin-top: 50px;">A Special Note</h2>
-        <p>Selamat ulang tahun! Ini adalah tempat di mana kamu bisa menuliskan pesan panjang, doa, dan harapan untuknya.</p>
-        <p>Semua yang terbaik untukmu di tahun ini.</p>
+        
+        <div class="letter-container">
+            <h2 style="color: #b89742; text-align: center; margin-top: 0; margin-bottom: 30px; font-weight: normal; letter-spacing: 1px;">
+                Happy Birthday, Sayang
+            </h2>
+            
+            <div class="letter-text">
+                <p>Hari ini adalah hari yang spesial. Aku ingin mengambil kesempatan ini untuk memberitahumu betapa berartinya dirimu buatku.</p>
+                <p>Kamu selalu bisa membuat hal-hal kecil terasa luar biasa. Tawa, cerita, dan caramu peduli selalu berhasil membuat hari-hariku jauh lebih baik.</p>
+                <p>Semoga di usiamu yang baru ini, semua impianmu satu per satu bisa terwujud. Aku akan selalu ada di sini untuk mendukungmu, merayakan setiap langkah kecilmu, dan menemanimu.</p>
+            </div>
+            
+            <div class="letter-signature">
+                With all my love,<br>
+                <strong>Nama Kamu</strong>
+            </div>
+        </div>
     </div>
 
 <!-- LAYAR 3B: Bunga -->
