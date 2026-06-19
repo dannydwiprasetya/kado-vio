@@ -3,283 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You, My Everything</title>
+    <title>Happy Birthday!</title>
     <style>
-        /* Pengaturan Dasar & Warna */
         body {
             margin: 0;
             padding: 0;
-            background-color: #2b1119; /* Warna maroon gelap seperti di video */
-            color: #f7e6ea; /* Pink sangat lembut */
+            background-color: #8a1c1c; /* Merah gelap elegan */
+            color: #f5f0e6; /* Beige premium */
             font-family: 'Georgia', serif;
             text-align: center;
             overflow-x: hidden;
         }
 
-        /* --- Layar Kado Depan --- */
-        #gift-screen {
+        /* Kelas untuk menyembunyikan elemen */
+        .hidden {
+            display: none !important;
+        }
+
+        /* --- Layar 1: Amplop Pembuka --- */
+        #envelope-screen {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            background-color: #2b1119;
-            z-index: 50;
-            position: relative;
-        }
-        
-        .gift-box {
-            font-size: 100px;
-            animation: bounce 2s infinite;
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-20px);}
-            60% {transform: translateY(-10px);}
-        }
-
-        /* --- Konten Utama --- */
-        #main-content {
-            display: none;
-            padding: 60px 20px;
-            animation: fadeIn 2s;
-            position: relative;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* --- Tipografi --- */
-        .subtitle {
-            font-size: 0.9em;
-            color: #d19a9a;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-
-        h1 {
-            font-size: 3em;
-            color: #f7e6ea;
-            margin-top: 0;
-            margin-bottom: 40px;
-            font-weight: normal;
-        }
-
-        h2 {
-            font-size: 1.8em;
-            font-weight: normal;
-            margin-bottom: 30px;
-            color: #f7e6ea;
-        }
-
-        .section {
-            margin-top: 80px;
-            margin-bottom: 80px;
-        }
-
-        /* --- Pemutar Musik Mengambang --- */
-        .music-player {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(20, 8, 12, 0.8);
-            border-radius: 12px;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            z-index: 100;
-            text-align: left;
-        }
-
-        .music-cover {
-            width: 50px;
-            height: 50px;
-            background-color: #333;
-            border-radius: 8px;
-            object-fit: cover;
-        }
-
-        .music-info p {
-            margin: 0;
-            font-size: 0.8em;
-            color: #aaa;
-        }
-
-        .music-info strong {
-            font-size: 0.9em;
-            color: #fff;
-            display: block;
-        }
-
-        /* --- Kartu Alasan (Grid) --- */
-        .reasons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .reason-card {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 25px 20px;
-            border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.05);
+        .envelope-icon {
+            font-size: 120px;
             transition: transform 0.3s;
         }
 
-        .reason-card:hover {
+        .envelope-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- Layar 2: Menu Utama --- */
+        #menu-screen {
+            padding: 50px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            color: #e3c28c; /* Aksen Gold */
+            font-weight: normal;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+
+        .menu-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .menu-item {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid #e3c28c;
+            border-radius: 15px;
+            padding: 30px;
+            width: 150px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: rgba(0,0,0,0.4);
             transform: translateY(-5px);
         }
 
-        .reason-card h4 {
-            margin-top: 0;
-            color: #e5a8b5;
-            font-size: 1.2em;
+        .menu-item span {
+            font-size: 60px;
+            display: block;
+            margin-bottom: 15px;
         }
 
-        .reason-card p {
-            font-size: 0.9em;
-            line-height: 1.6;
-            color: #ccc;
-            margin-bottom: 0;
+        /* --- Layar 3: Halaman Konten --- */
+        .content-screen {
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
         }
 
-        /* --- Galeri Foto --- */
-        .gallery-grid {
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: transparent;
+            border: 1px solid #e3c28c;
+            color: #e3c28c;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .back-btn:hover {
+            background: #e3c28c;
+            color: #8a1c1c;
+        }
+
+        p {
+            line-height: 1.8;
+            font-size: 1.1em;
+            color: #eeddbb;
+        }
+        
+        .gallery {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            max-width: 600px;
-            margin: 0 auto;
+            gap: 15px;
+            margin-top: 30px;
         }
-
-        .gallery-grid img {
+        
+        .gallery img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
             border-radius: 8px;
-            filter: grayscale(100%); /* Membuat foto hitam putih seperti di video */
-            transition: filter 0.5s;
-        }
-
-        .gallery-grid img:hover {
-            filter: grayscale(0%); /* Berwarna saat disentuh */
-        }
-
-        /* Teks Penutup */
-        .footer-text {
-            font-style: italic;
-            color: #d19a9a;
-            margin-top: 50px;
+            border: 2px solid #e3c28c;
         }
     </style>
 </head>
 <body>
 
-    <div id="gift-screen" onclick="openGift()">
-        <div class="gift-box">🎁</div>
-        <p style="color: #d19a9a; letter-spacing: 2px;">Tap to open</p>
+    <!-- LAYAR 1: Amplop -->
+    <div id="envelope-screen" onclick="openMenu()">
+        <h2 style="color: #e3c28c; font-weight: normal;">Happy Birthday!</h2>
+        <div class="envelope-icon">💌</div>
+        <p>Click the seal to open</p>
     </div>
 
-    <div id="main-content">
+    <!-- LAYAR 2: Menu Utama -->
+    <div id="menu-screen" class="hidden">
+        <h1>These are for you</h1>
+        <div class="menu-container">
+            <div class="menu-item" onclick="showContent('message-screen')">
+                <span>📝</span>
+                <p>Message</p>
+            </div>
+            <div class="menu-item" onclick="showContent('flower-screen')">
+                <span>💐</span>
+                <p>Flower</p>
+            </div>
+            <div class="menu-item" onclick="showContent('gallery-screen')">
+                <span>📸</span>
+                <p>Memories</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- LAYAR 3A: Surat / Pesan -->
+    <div id="message-screen" class="content-screen hidden">
+        <button class="back-btn" onclick="backToMenu()">⟵ Back</button>
+        <h2 style="color: #e3c28c; margin-top: 50px;">A Special Note</h2>
+        <p>Selamat ulang tahun! Ini adalah tempat di mana kamu bisa menuliskan pesan panjang, doa, dan harapan untuknya.</p>
+        <p>Semua yang terbaik untukmu di tahun ini.</p>
+    </div>
+
+    <!-- LAYAR 3B: Bunga -->
+    <div id="flower-screen" class="content-screen hidden">
+        <button class="back-btn" onclick="backToMenu()">⟵ Back</button>
+        <h2 style="color: #e3c28c; margin-top: 50px;">Your Flowers</h2>
+        <div style="font-size: 150px; margin: 40px 0;">🌻</div>
+        <p>You are kind in ways that truly matter.</p>
+        <p>You are capable of achieving your goals.</p>
+    </div>
+
+    <!-- LAYAR 3C: Galeri & Musik -->
+    <div id="gallery-screen" class="content-screen hidden">
+        <button class="back-btn" onclick="backToMenu()">⟵ Back</button>
+        <h2 style="color: #e3c28c; margin-top: 50px;">Our Memories</h2>
+        <p>This reminds me of you.</p>
         
-        <div class="music-player">
-            <img src="foto1.jpg" alt="Album Cover" class="music-cover">
-            <div class="music-info">
-                <strong>Lagu Kita</strong>
-                <p>Bergema Selamanya</p>
-            </div>
+        <div class="gallery">
+            <img src="foto1.jpg" alt="Memory 1">
+            <img src="foto2.jpg" alt="Memory 2">
+            <img src="foto3.jpg" alt="Memory 3">
+            <img src="foto4.jpg" alt="Memory 4">
         </div>
-
-        <audio id="bg-music" loop>
-            <source src="lagu-kita.mp3" type="audio/mpeg">
-        </audio>
-
-        <div class="section">
-            <p class="subtitle">a love letter in bloom</p>
-            <h1>For You,<br>My Everything</h1>
-            <p class="subtitle" style="margin-top: 40px;">from my heart</p>
-            <h2>You are my wildest dream<br>come true.</h2>
-            <p style="max-width: 600px; margin: 0 auto; line-height: 1.8; color: #ccc;">
-                In a world full of ordinary moments, you are the extraordinary one. The way you laugh, the way you care, the way you simply exist — it fills every corner of my world with something I never knew I needed.
-            </p>
-        </div>
-
-        <div class="section">
-            <p class="subtitle">a thousand reasons why</p>
-            <h2>Why I Love You</h2>
-            
-            <div class="reasons-grid">
-                <div class="reason-card">
-                    <h4>✨ Your Smile</h4>
-                    <p>It lights up every room and every corner of my heart simultaneously.</p>
-                </div>
-                <div class="reason-card">
-                    <h4>💫 Your Soul</h4>
-                    <p>Rare, genuine, and more beautiful than any flower ever grown.</p>
-                </div>
-                <div class="reason-card">
-                    <h4>🤍 Your Kindness</h4>
-                    <p>The way you love the world makes me want to be better every single day.</p>
-                </div>
-                <div class="reason-card">
-                    <h4>🎵 Your Laughter</h4>
-                    <p>The best sound in the universe. My favourite melody, always.</p>
-                </div>
-                <div class="reason-card">
-                    <h4>🌿 Your Strength</h4>
-                    <p>You carry so much grace through everything. I admire you endlessly.</p>
-                </div>
-                <div class="reason-card">
-                    <h4>🦋 Simply You</h4>
-                    <p>Every version of you, every moment — you are more than enough.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <p class="subtitle">captured in time</p>
-            <h2>Your Beautiful Pictures</h2>
-            
-            <div class="gallery-grid">
-                <img src="foto1.jpg" alt="You 1">
-                <img src="foto2.jpg" alt="You 2">
-                <img src="foto3.jpg" alt="You 3">
-                <img src="foto4.jpg" alt="You 4">
-            </div>
-        </div>
-
-        <div class="section">
-            <p class="subtitle">always & forever</p>
-            <h2>You Are Loved<br>Beyond Words</h2>
-            <p style="max-width: 600px; margin: 0 auto; line-height: 1.8; color: #ccc;">
-                No matter where life takes us, know that somewhere in the universe, there is a garden blooming with every feeling I have ever held for you. You deserve the world. You deserve all the flowers. You deserve everything.
-            </p>
-            <p class="footer-text">made with love, just for you 🤍</p>
-        </div>
-
     </div>
 
+    <!-- JavaScript untuk mengatur perpindahan halaman -->
     <script>
-        function openGift() {
-            document.getElementById('gift-screen').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-            
-            // Putar lagu
-            let music = document.getElementById('bg-music');
-            music.play().catch(function(error) {
-                console.log("Browser memblokir autoplay audio. Pengguna harus berinteraksi dengan halaman.");
-            });
+        function openMenu() {
+            document.getElementById('envelope-screen').classList.add('hidden');
+            document.getElementById('menu-screen').classList.remove('hidden');
+        }
+
+        function showContent(screenId) {
+            // Sembunyikan menu
+            document.getElementById('menu-screen').classList.add('hidden');
+            // Tampilkan halaman yang diklik
+            document.getElementById(screenId).classList.remove('hidden');
+        }
+
+        function backToMenu() {
+            // Sembunyikan semua konten
+            document.getElementById('message-screen').classList.add('hidden');
+            document.getElementById('flower-screen').classList.add('hidden');
+            document.getElementById('gallery-screen').classList.add('hidden');
+            // Tampilkan kembali menu utama
+            document.getElementById('menu-screen').classList.remove('hidden');
         }
     </script>
 </body>
