@@ -132,6 +132,55 @@
             border-radius: 8px;
             border: 2px solid #e3c28c;
         }
+        /* --- Animasi Menu Bunga --- */
+        .flower-container {
+            position: relative;
+            margin: 60px auto;
+            height: 450px;
+            max-width: 700px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flower-emoji {
+            font-size: 160px;
+            z-index: 10;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-text {
+            position: absolute;
+            background: rgba(255, 245, 230, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.5); /* Aksen gold tipis */
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-size: 0.95em;
+            color: #eeddbb;
+            max-width: 220px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            backdrop-filter: blur(5px);
+            animation: fadeInText 1s forwards;
+            line-height: 1.5;
+        }
+
+        @keyframes fadeInText {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mengatur Posisi & Waktu Muncul Teks */
+        .text-1 { top: 5%; left: 5%; transform: translateY(20px); animation-delay: 0.5s; }
+        .text-2 { top: 15%; right: 5%; transform: translateY(20px); animation-delay: 1.2s; }
+        .text-3 { bottom: 15%; left: 0%; transform: translateY(20px); animation-delay: 1.9s; }
+        .text-4 { bottom: 5%; right: 0%; transform: translateY(20px); animation-delay: 2.6s; }
     </style>
 </head>
 <body>
@@ -170,13 +219,20 @@
         <p>Semua yang terbaik untukmu di tahun ini.</p>
     </div>
 
-    <!-- LAYAR 3B: Bunga -->
+<!-- LAYAR 3B: Bunga -->
     <div id="flower-screen" class="content-screen hidden">
         <button class="back-btn" onclick="backToMenu()">⟵ Back</button>
-        <h2 style="color: #e3c28c; margin-top: 50px;">Your Flowers</h2>
-        <div style="font-size: 150px; margin: 40px 0;">🌻</div>
-        <p>You are kind in ways that truly matter.</p>
-        <p>You are capable of achieving your goals.</p>
+        
+        <div class="flower-container">
+            <!-- Kamu bisa mengganti emoji ini dengan gambar buket jika punya file-nya (misal: <img src="buket.png">) -->
+            <div class="flower-emoji">💐</div>
+            
+            <!-- Teks yang akan muncul satu per satu -->
+            <div class="floating-text text-1">You are kind in ways that truly matter.</div>
+            <div class="floating-text text-2">Melihatmu tersenyum adalah bagian terbaik dari hariku.</div>
+            <div class="floating-text text-3">You are capable of achieving all your dreams.</div>
+            <div class="floating-text text-4">Terima kasih sudah menjadi versi terbaik dari dirimu.</div>
+        </div>
     </div>
 
     <!-- LAYAR 3C: Galeri & Musik -->
