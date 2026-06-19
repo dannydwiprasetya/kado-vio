@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You, My Everything</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a; 
+            color: #f5f0e6;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        #gift-screen {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .gift-box {
+            font-size: 80px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        #main-content {
+            display: none;
+            padding: 50px 20px;
+            animation: fadeIn 3s;
+            background-color: #f5f0e6; 
+            color: #333;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #b89742; 
+            margin-bottom: 10px;
+            font-weight: normal;
+            letter-spacing: 2px;
+        }
+
+        h3 {
+            color: #8c7326;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 20px auto;
+            color: #555;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            max-width: 400px;
+            margin: 40px auto;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid #d4af37; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="gift-screen" onclick="openGift()">
+        <div class="gift-box">🎁</div>
+        <p style="color: #d4af37; letter-spacing: 2px; margin-top: 20px;">Tap to open</p>
+    </div>
+
+    <div id="main-content">
+        <audio id="bg-music" loop>
+            <source src="lagu-kita.mp3" type="audio/mpeg">
+        </audio>
+
+        <h3>a love letter</h3>
+        <h1>For You,<br>My Everything</h1>
+        <p>You are my wildest dream come true. Di dunia yang penuh hal biasa, kamu adalah hal yang paling luar biasa bagiku.</p>
+        
+        <p>A thousand reasons why I love you:</p>
+        <p>✨ <strong>Your Smile</strong>: Menerangi hariku.<br>✨ <strong>Your Kindness</strong>: Hati terbaik yang pernah aku kenal.</p>
+
+        <h3>Your Beautiful Pictures</h3>
+        <div class="gallery">
+            <img src="foto1.jpg" alt="Foto 1">
+            <img src="foto2.jpg" alt="Foto 2">
+            <img src="foto3.jpg" alt="Foto 3">
+            <img src="foto4.jpg" alt="Foto 4">
+        </div>
+    </div>
+
+    <script>
+        function openGift() {
+            document.getElementById('gift-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            document.getElementById('bg-music').play();
+        }
+    </script>
+</body>
+</html>
