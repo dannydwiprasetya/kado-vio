@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For You, My Everything</title>
     <style>
+        /* Pengaturan Dasar & Warna */
         body {
             margin: 0;
             padding: 0;
-            background-color: #1a1a1a; 
-            color: #f5f0e6;
+            background-color: #2b1119; /* Warna maroon gelap seperti di video */
+            color: #f7e6ea; /* Pink sangat lembut */
             font-family: 'Georgia', serif;
             text-align: center;
             overflow-x: hidden;
         }
 
+        /* --- Layar Kado Depan --- */
         #gift-screen {
             height: 100vh;
             display: flex;
@@ -22,10 +24,13 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            background-color: #2b1119;
+            z-index: 50;
+            position: relative;
         }
         
         .gift-box {
-            font-size: 80px;
+            font-size: 100px;
             animation: bounce 2s infinite;
         }
 
@@ -35,12 +40,12 @@
             60% {transform: translateY(-10px);}
         }
 
+        /* --- Konten Utama --- */
         #main-content {
             display: none;
-            padding: 50px 20px;
-            animation: fadeIn 3s;
-            background-color: #f5f0e6; 
-            color: #333;
+            padding: 60px 20px;
+            animation: fadeIn 2s;
+            position: relative;
         }
 
         @keyframes fadeIn {
@@ -48,41 +53,134 @@
             to { opacity: 1; }
         }
 
-        h1 {
-            font-size: 2.5em;
-            color: #b89742; 
-            margin-bottom: 10px;
-            font-weight: normal;
+        /* --- Tipografi --- */
+        .subtitle {
+            font-size: 0.9em;
+            color: #d19a9a;
             letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
         }
 
-        h3 {
-            color: #8c7326;
+        h1 {
+            font-size: 3em;
+            color: #f7e6ea;
+            margin-top: 0;
+            margin-bottom: 40px;
             font-weight: normal;
-            letter-spacing: 1px;
         }
 
-        p {
-            font-size: 1.1em;
-            line-height: 1.8;
-            max-width: 600px;
-            margin: 20px auto;
-            color: #555;
+        h2 {
+            font-size: 1.8em;
+            font-weight: normal;
+            margin-bottom: 30px;
+            color: #f7e6ea;
         }
 
-        .gallery {
+        .section {
+            margin-top: 80px;
+            margin-bottom: 80px;
+        }
+
+        /* --- Pemutar Musik Mengambang --- */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(20, 8, 12, 0.8);
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 100;
+            text-align: left;
+        }
+
+        .music-cover {
+            width: 50px;
+            height: 50px;
+            background-color: #333;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .music-info p {
+            margin: 0;
+            font-size: 0.8em;
+            color: #aaa;
+        }
+
+        .music-info strong {
+            font-size: 0.9em;
+            color: #fff;
+            display: block;
+        }
+
+        /* --- Kartu Alasan (Grid) --- */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .reason-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .reason-card h4 {
+            margin-top: 0;
+            color: #e5a8b5;
+            font-size: 1.2em;
+        }
+
+        .reason-card p {
+            font-size: 0.9em;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 0;
+        }
+
+        /* --- Galeri Foto --- */
+        .gallery-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            max-width: 400px;
-            margin: 40px auto;
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .gallery img {
+        .gallery-grid img {
             width: 100%;
-            border-radius: 4px;
-            border: 1px solid #d4af37; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            filter: grayscale(100%); /* Membuat foto hitam putih seperti di video */
+            transition: filter 0.5s;
+        }
+
+        .gallery-grid img:hover {
+            filter: grayscale(0%); /* Berwarna saat disentuh */
+        }
+
+        /* Teks Penutup */
+        .footer-text {
+            font-style: italic;
+            color: #d19a9a;
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -90,35 +188,98 @@
 
     <div id="gift-screen" onclick="openGift()">
         <div class="gift-box">🎁</div>
-        <p style="color: #d4af37; letter-spacing: 2px; margin-top: 20px;">Tap to open</p>
+        <p style="color: #d19a9a; letter-spacing: 2px;">Tap to open</p>
     </div>
 
     <div id="main-content">
+        
+        <div class="music-player">
+            <img src="foto1.jpg" alt="Album Cover" class="music-cover">
+            <div class="music-info">
+                <strong>Lagu Kita</strong>
+                <p>Bergema Selamanya</p>
+            </div>
+        </div>
+
         <audio id="bg-music" loop>
             <source src="lagu-kita.mp3" type="audio/mpeg">
         </audio>
 
-        <h3>a love letter</h3>
-        <h1>For You,<br>My Everything</h1>
-        <p>You are my wildest dream come true. Di dunia yang penuh hal biasa, kamu adalah hal yang paling luar biasa bagiku.</p>
-        
-        <p>A thousand reasons why I love you:</p>
-        <p>✨ <strong>Your Smile</strong>: Menerangi hariku.<br>✨ <strong>Your Kindness</strong>: Hati terbaik yang pernah aku kenal.</p>
-
-        <h3>Your Beautiful Pictures</h3>
-        <div class="gallery">
-            <img src="foto1.jpg" alt="Foto 1">
-            <img src="foto2.jpg" alt="Foto 2">
-            <img src="foto3.jpg" alt="Foto 3">
-            <img src="foto4.jpg" alt="Foto 4">
+        <div class="section">
+            <p class="subtitle">a love letter in bloom</p>
+            <h1>For You,<br>My Everything</h1>
+            <p class="subtitle" style="margin-top: 40px;">from my heart</p>
+            <h2>You are my wildest dream<br>come true.</h2>
+            <p style="max-width: 600px; margin: 0 auto; line-height: 1.8; color: #ccc;">
+                In a world full of ordinary moments, you are the extraordinary one. The way you laugh, the way you care, the way you simply exist — it fills every corner of my world with something I never knew I needed.
+            </p>
         </div>
+
+        <div class="section">
+            <p class="subtitle">a thousand reasons why</p>
+            <h2>Why I Love You</h2>
+            
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <h4>✨ Your Smile</h4>
+                    <p>It lights up every room and every corner of my heart simultaneously.</p>
+                </div>
+                <div class="reason-card">
+                    <h4>💫 Your Soul</h4>
+                    <p>Rare, genuine, and more beautiful than any flower ever grown.</p>
+                </div>
+                <div class="reason-card">
+                    <h4>🤍 Your Kindness</h4>
+                    <p>The way you love the world makes me want to be better every single day.</p>
+                </div>
+                <div class="reason-card">
+                    <h4>🎵 Your Laughter</h4>
+                    <p>The best sound in the universe. My favourite melody, always.</p>
+                </div>
+                <div class="reason-card">
+                    <h4>🌿 Your Strength</h4>
+                    <p>You carry so much grace through everything. I admire you endlessly.</p>
+                </div>
+                <div class="reason-card">
+                    <h4>🦋 Simply You</h4>
+                    <p>Every version of you, every moment — you are more than enough.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <p class="subtitle">captured in time</p>
+            <h2>Your Beautiful Pictures</h2>
+            
+            <div class="gallery-grid">
+                <img src="foto1.jpg" alt="You 1">
+                <img src="foto2.jpg" alt="You 2">
+                <img src="foto3.jpg" alt="You 3">
+                <img src="foto4.jpg" alt="You 4">
+            </div>
+        </div>
+
+        <div class="section">
+            <p class="subtitle">always & forever</p>
+            <h2>You Are Loved<br>Beyond Words</h2>
+            <p style="max-width: 600px; margin: 0 auto; line-height: 1.8; color: #ccc;">
+                No matter where life takes us, know that somewhere in the universe, there is a garden blooming with every feeling I have ever held for you. You deserve the world. You deserve all the flowers. You deserve everything.
+            </p>
+            <p class="footer-text">made with love, just for you 🤍</p>
+        </div>
+
     </div>
 
     <script>
         function openGift() {
             document.getElementById('gift-screen').style.display = 'none';
             document.getElementById('main-content').style.display = 'block';
-            document.getElementById('bg-music').play();
+            
+            // Putar lagu
+            let music = document.getElementById('bg-music');
+            music.play().catch(function(error) {
+                console.log("Browser memblokir autoplay audio. Pengguna harus berinteraksi dengan halaman.");
+            });
         }
     </script>
 </body>
